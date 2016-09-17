@@ -99,6 +99,7 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="rqk-dc-H7M" appends="YES" id="iPx-ah-1k6"/>
+                            <outletCollection property="gestureRecognizers" destination="QrP-6y-7o9" appends="YES" id="GOm-Ry-kpW"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Tip Calculator" id="86d-TU-y1h">
@@ -122,6 +123,11 @@
                         <action selector="onTap:" destination="BYZ-38-t0r" id="6cx-gq-cLO"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="QrP-6y-7o9">
+                    <connections>
+                        <action selector="panChangeSegmentValue:" destination="BYZ-38-t0r" id="nHb-nf-33o"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1117" y="366"/>
         </scene>

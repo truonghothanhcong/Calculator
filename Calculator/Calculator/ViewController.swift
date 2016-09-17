@@ -8,6 +8,17 @@
 
 import UIKit
 
+extension UIPanGestureRecognizer {
+    func isLeft(theViewYouArePassing: UIView) -> Bool {
+        let velocity : CGPoint = velocityInView(theViewYouArePassing)
+        if velocity.x > 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var billTextField: UITextField!
@@ -15,7 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     
-    var tipPersentages = [0.18, 0.2, 0.3]
+    var tipPersentages = [18, 20, 30]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +36,15 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let firstValue = defaults.objectForKey("firstSegment") as? Int {
-            tipPersentages[0] = Double(firstValue) / 100
+            tipPersentages[0] = firstValue
             tipControl.setTitle("\(firstValue)%", forSegmentAtIndex: 0)
         }
         if let secondValue = defaults.objectForKey("secondSegment") as? Int {
-            tipPersentages[1] = Double(secondValue) / 100
+            tipPersentages[1] = secondValue
             tipControl.setTitle("\(secondValue)%", forSegmentAtIndex: 1)
         }
         if let thirdValue = defaults.objectForKey("thirdSegment") as? Int {
-            tipPersentages[2] = Double(thirdValue) / 100
+            tipPersentages[2] = thirdValue
             tipControl.setTitle("\(thirdValue)%", forSegmentAtIndex: 2)
         }
         
@@ -51,12 +62,34 @@ class ViewController: UIViewController {
 
     @IBAction func calculate(sender: AnyObject) {
         let bill = Double(billTextField.text!) ?? 0
-        let tip = bill * tipPersentages[tipControl.selectedSegmentIndex]
+        let tip = bill * Double(tipPersentages[tipControl.selectedSegmentIndex]) / 100
         let total = bill + tip
         
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
     }
+    
+    @IBAction func panChangeSegmentValue(sender: UIPanGestureRecognizer) {
+        
+        let value = tipPersentages[tipControl.selectedSegmentIndex]
+        if sender.isLeft(self.view) {
+            if tipPersentages[tipControl.selectedSegmentIndex] > 0 {
+                // down value
+                tipPersentages[tipControl.selectedSegmentIndex] = value - 1
+                tipControl.setTitle("\(value - 1)%", forSegmentAtIndex: tipControl.selectedSegmentIndex)
+            }
+        }
+        else {
+            if tipPersentages[tipControl.selectedSegmentIndex] < 100 {
+                // up value
+                tipPersentages[tipControl.selectedSegmentIndex] = value + 1
+                tipControl.setTitle("\(value + 1)%", forSegmentAtIndex: tipControl.selectedSegmentIndex)
+            }
+        }
+        
+        self.calculate(billTextField)
+    }
+    
     
 }
 
