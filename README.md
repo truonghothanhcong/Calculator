@@ -23,5 +23,5 @@ additional:
 
 # Video
 
-https://github.com/truonghothanhcong/Calculator/blob/master/demo.gif
+![alt tag](https://github.com/truonghothanhcong/Calculator/blob/master/demo.gif)
 
