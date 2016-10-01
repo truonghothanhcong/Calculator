@@ -23,5 +23,5 @@ additional:
 
 # Video
 
-https://i.imgur.com/8xPMHzr.gif
+https://github.com/truonghothanhcong/Calculator/blob/master/demo.gif
 
