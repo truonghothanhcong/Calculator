@@ -1,10 +1,10 @@
 # Calculator
 
-TipCalculator is the calculator application on iOS.
-Author: truonghothanhcong (Trương Hồ Thành Công)
-Time spent: about 8 hours for total
-Xcode version: 7.3.1
-Swift version: 2.2
+- TipCalculator is the calculator application on iOS.
+- Author: truonghothanhcong (Trương Hồ Thành Công)
+- Time spent: about 8 hours for total
+- Xcode version: 7.3.1
+- Swift version: 2.2
 
 # user Stories
 
