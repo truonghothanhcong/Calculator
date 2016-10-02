@@ -35,6 +35,12 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        self.view.alpha = 0
+        UIView.animate(withDuration: 0.4, animations: {
+            // This causes first view to fade in and second view to fade out
+                self.view.alpha = 1
+        })
+        
         // show keyboard
         billTextField.becomeFirstResponder()
         
