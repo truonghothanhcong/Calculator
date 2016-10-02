@@ -27,17 +27,54 @@ class SetttingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func saveSettings(sender: AnyObject) {
-        valueSegment.first = Int(firstSegmentTextField.text!) ?? 0
-        valueSegment.second = Int(secondSegmentTextField.text!) ?? 0
-        valueSegment.third = Int(thirdSegmentTextField.text!) ?? 0
+    @IBAction func saveSettings(_ sender: AnyObject) {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(valueSegment.first, forKey: "firstSegment")
-        defaults.setInteger(valueSegment.second, forKey: "secondSegment")
-        defaults.setInteger(valueSegment.third, forKey: "thirdSegment")
+        let handleSaving = { (alertAction: UIAlertAction) -> () in
+            self.saveSettings()
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        if Int(firstSegmentTextField.text!) == nil
+            || Int(secondSegmentTextField.text!) == nil
+            || Int(thirdSegmentTextField.text!) == nil {
+            
+            let alert = UIAlertController(title: "Message", message: "You have empty cell, i will fill default value", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler: handleSaving))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        self.saveSettings()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func saveSettings() {
+        
+        valueSegment.first = Int(firstSegmentTextField.text!) ?? 18
+        valueSegment.second = Int(secondSegmentTextField.text!) ?? 20
+        valueSegment.third = Int(thirdSegmentTextField.text!) ?? 30
+        
+        if !checkValid(value: valueSegment.first)
+            || !checkValid(value: valueSegment.second)
+            || !checkValid(value: valueSegment.third) {
+            
+            let alert = UIAlertController(title: "Message", message: "Please input value minimum is 0 and maximum is 100", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        let defaults = UserDefaults.standard
+        defaults.set(valueSegment.first, forKey: "firstSegment")
+        defaults.set(valueSegment.second, forKey: "secondSegment")
+        defaults.set(valueSegment.third, forKey: "thirdSegment")
         defaults.synchronize()
+    }
+    
+    func checkValid(value: Int) -> Bool {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        if value < 0 || value > 100 {
+            return false
+        }
+        return true
     }
 }

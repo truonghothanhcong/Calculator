@@ -9,8 +9,8 @@
 import UIKit
 
 extension UIPanGestureRecognizer {
-    func isLeft(theViewYouArePassing: UIView) -> Bool {
-        let velocity : CGPoint = velocityInView(theViewYouArePassing)
+    func isLeft(_ theViewYouArePassing: UIView) -> Bool {
+        let velocity : CGPoint = self.velocity(in: theViewYouArePassing)
         if velocity.x > 0 {
             return false
         } else {
@@ -33,27 +33,27 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         // show keyboard
         billTextField.becomeFirstResponder()
         
         // load data
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let billValue = defaults.objectForKey("bill") as? String {
+        let defaults = UserDefaults.standard
+        if let billValue = defaults.object(forKey: "bill") as? String {
             billTextField.text = billValue
         }
-        if let firstValue = defaults.objectForKey("firstSegment") as? Int {
+        if let firstValue = defaults.object(forKey: "firstSegment") as? Int {
             tipPersentages[0] = firstValue
-            tipControl.setTitle("\(firstValue)%", forSegmentAtIndex: 0)
+            tipControl.setTitle("\(firstValue)%", forSegmentAt: 0)
         }
-        if let secondValue = defaults.objectForKey("secondSegment") as? Int {
+        if let secondValue = defaults.object(forKey: "secondSegment") as? Int {
             tipPersentages[1] = secondValue
-            tipControl.setTitle("\(secondValue)%", forSegmentAtIndex: 1)
+            tipControl.setTitle("\(secondValue)%", forSegmentAt: 1)
         }
-        if let thirdValue = defaults.objectForKey("thirdSegment") as? Int {
+        if let thirdValue = defaults.object(forKey: "thirdSegment") as? Int {
             tipPersentages[2] = thirdValue
-            tipControl.setTitle("\(thirdValue)%", forSegmentAtIndex: 2)
+            tipControl.setTitle("\(thirdValue)%", forSegmentAt: 2)
         }
         
         self.calculate(billTextField)
@@ -64,11 +64,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func onTap(sender: AnyObject) {
+    @IBAction func onTap(_ sender: AnyObject) {
         self.view.endEditing(true)
     }
 
-    @IBAction func calculate(sender: AnyObject) {
+    @IBAction func calculate(_ sender: AnyObject) {
         let bill = Double(billTextField.text!) ?? 0
         let tip = bill * Double(tipPersentages[tipControl.selectedSegmentIndex]) / 100
         let total = bill + tip
@@ -77,26 +77,26 @@ class ViewController: UIViewController {
         totalLabel.text = String(format: "$%.2f", total)
         
         // saving bill
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(billTextField.text, forKey: "bill")
+        let defaults = UserDefaults.standard
+        defaults.set(billTextField.text, forKey: "bill")
         defaults.synchronize()
     }
     
-    @IBAction func panChangeSegmentValue(sender: UIPanGestureRecognizer) {
+    @IBAction func panChangeSegmentValue(_ sender: UIPanGestureRecognizer) {
         
         let value = tipPersentages[tipControl.selectedSegmentIndex]
         if sender.isLeft(self.view) {
             if tipPersentages[tipControl.selectedSegmentIndex] > 0 {
                 // down value
                 tipPersentages[tipControl.selectedSegmentIndex] = value - 1
-                tipControl.setTitle("\(value - 1)%", forSegmentAtIndex: tipControl.selectedSegmentIndex)
+                tipControl.setTitle("\(value - 1)%", forSegmentAt: tipControl.selectedSegmentIndex)
             }
         }
         else {
             if tipPersentages[tipControl.selectedSegmentIndex] < 100 {
                 // up value
                 tipPersentages[tipControl.selectedSegmentIndex] = value + 1
-                tipControl.setTitle("\(value + 1)%", forSegmentAtIndex: tipControl.selectedSegmentIndex)
+                tipControl.setTitle("\(value + 1)%", forSegmentAt: tipControl.selectedSegmentIndex)
             }
         }
         
