@@ -4,7 +4,7 @@
 
 Submitted by: *truonghothanhcong (Trương Hồ Thành Công)*
 
-Time spent: *8* hours spent in total
+Time spent: *8.5* hours spent in total
 
 ## User Stories
 
