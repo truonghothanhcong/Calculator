@@ -21,8 +21,10 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
+- [ ] Use autolayout
 - [ ] Improve UI
 - [ ] Use gesture swipe to change persent value
+- [ ] Check validate value input and empty input in setting view
 
 ## Video Walkthrough 
 
