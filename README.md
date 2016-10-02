@@ -1,27 +1,34 @@
-# Calculator
+# Pre-work - Calculator
 
-- TipCalculator is the calculator application on iOS.
-- Author: truonghothanhcong (Trương Hồ Thành Công)
-- Time spent: about 8 hours for total
-- Xcode version: 7.3.1
-- Swift version: 2.2
+*Calculator* is a tip calculator application for iOS.
 
-# user Stories
+Submitted by: *truonghothanhcong (Trương Hồ Thành Công)*
 
-Required:
-- Enter a bill amount, choose a percentage. Calculator will show the tip and total.
-- Settings page to change the default tip percentage.
+Time spent: *8* hours spent in total
 
-Optional:
-- UI animation.
-- Remember the percentage when app restart.
-- Loading and saving percentage by NSUserDefaults.
+## User Stories
 
-additional:
-- Improve UI
-- Use gesture swipe to change persent value
+The following **required** functionality is complete:
 
-# Video
+* [ ] User can enter a bill amount, choose a tip percentage, and see the tip and total values.
+* [ ] Settings page to change the default tip percentage.
 
-![alt tag](https://github.com/truonghothanhcong/Calculator/blob/master/demo.gif)
+The following **optional** features are implemented:
+* [ ] UI animations
+* [ ] Remembering the bill amount across app restarts (if < 10mins)
+* [ ] Using locale-specific currency and currency thousands separators.
+* [ ] Making sure the keyboard is always visible and the bill amount is always the first responder. This way the user doesn't have to tap anywhere to use this app. Just launch the app and start typing.
+
+The following **additional** features are implemented:
+
+- [ ] Improve UI
+- [ ] Use gesture swipe to change persent value
+
+## Video Walkthrough 
+
+Here's a walkthrough of implemented user stories:
+
+<img src='https://i.imgur.com/ZoOYFyD.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

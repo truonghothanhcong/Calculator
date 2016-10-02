@@ -19,6 +19,7 @@ class SetttingViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        firstSegmentTextField.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {

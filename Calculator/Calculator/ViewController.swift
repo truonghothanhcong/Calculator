@@ -34,7 +34,15 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+        // show keyboard
+        billTextField.becomeFirstResponder()
+        
+        // load data
         let defaults = NSUserDefaults.standardUserDefaults()
+        if let billValue = defaults.objectForKey("bill") as? String {
+            billTextField.text = billValue
+        }
         if let firstValue = defaults.objectForKey("firstSegment") as? Int {
             tipPersentages[0] = firstValue
             tipControl.setTitle("\(firstValue)%", forSegmentAtIndex: 0)
@@ -67,6 +75,11 @@ class ViewController: UIViewController {
         
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
+        
+        // saving bill
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(billTextField.text, forKey: "bill")
+        defaults.synchronize()
     }
     
     @IBAction func panChangeSegmentValue(sender: UIPanGestureRecognizer) {
